@@ -13,7 +13,7 @@ pipeline {
     stages {
        
         stage("create docker image for test") {
-            steps{
+            steps {
                 echo " ============== start building image for deploy  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker build  -t nazarserver/shoptest .'
@@ -21,7 +21,7 @@ pipeline {
             }
             }
         stage("test time"){
-            steps{
+            steps {
                 echo " ============== Selenium Test  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' echo Super-puper-test'    
@@ -29,7 +29,7 @@ pipeline {
             }
         }
          stage("clen docker for future  test"){
-             steps{   
+             steps {   
                 echo " ============== Clear after test  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker stop shoptest'
@@ -42,7 +42,7 @@ pipeline {
             agent { 
                 label 'ubuntu'
             }
-            steps{
+            steps {
                 echo "================ Start building images for integration========="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker build  -t nazarserver/shop .'
