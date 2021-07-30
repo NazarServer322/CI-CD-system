@@ -7,7 +7,7 @@ pipeline {
                 echo "time to show world our skill"
             }
         }
-        steps('Test on Linux') {
+        steps('Deploy') {
             agent { 
                 label 'Test'
             }
@@ -18,7 +18,7 @@ pipeline {
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shoptest'    
             }
             }
-        stage('Test on Windows') {
+        stage('Integration') {
             agent {
                 label 'ubuntu'
             }
