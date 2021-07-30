@@ -19,6 +19,7 @@ pipeline {
                 sh 'sudo docker run -d --restart=always -p 80:80 --name shoptest nazarserver/shoptest'    
             }
             }
+            }
         stage("test time"){
             steps {
                 echo " ============== Selenium Test  =================="
@@ -26,7 +27,7 @@ pipeline {
                 sh ' echo Super-puper-test'    
             }
             }
-        }
+            }
          stage("clen docker for future  test"){
              steps {   
                 echo " ============== Clear after test  =================="
@@ -34,9 +35,8 @@ pipeline {
                 sh ' sudo docker stop shoptest'
                 sh 'sudo docker rm shoptest'    
             }
+            }           
             }
-           
-        }
         stage("integration") {    
             agent { 
                 label 'ubuntu'
@@ -47,8 +47,8 @@ pipeline {
                 sh ' sudo docker build  -t nazarserver/shop .'
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shop'
              }
-         }  
-      }
+             }  
+             }
     }
   }
 }
