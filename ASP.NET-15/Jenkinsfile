@@ -12,7 +12,7 @@ pipeline {
     }
     stages {
        
-        stage("create docker image") {
+        stage("create docker image for test") {
             steps {
                 echo " ============== start building image for deploy  =================="
                 dir ('ASP.NET-15/Shop-15') {
