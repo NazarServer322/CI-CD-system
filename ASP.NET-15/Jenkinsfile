@@ -15,7 +15,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
-                dir ('Shop-15') {
+                dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker build  -t nazarserver/shopTest .'
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/Test'
                 }
