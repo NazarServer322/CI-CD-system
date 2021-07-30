@@ -17,7 +17,7 @@ pipeline {
                 echo " ============== start building image for deploy  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker build  -t nazarserver/shoptest .'
-                sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shoptest'    
+                sh 'sudo docker run -d --restart=always -p 80:80 --name shoptest nazarserver/shoptest'    
             }
             }
         }
