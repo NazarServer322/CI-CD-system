@@ -20,7 +20,6 @@ pipeline {
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shoptest'    
             }
             }
-        steps ("create docker image")
             agent { 
                 label 'ubuntu'
             }
