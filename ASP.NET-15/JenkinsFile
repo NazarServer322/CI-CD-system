@@ -7,7 +7,7 @@ pipeline {
                 echo "time to show world our skill"
             }
         }
-        stage('Test on Linux') {
+        steps('Test on Linux') {
             agent { 
                 label 'Test'
             }
