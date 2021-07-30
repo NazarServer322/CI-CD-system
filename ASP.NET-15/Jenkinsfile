@@ -20,6 +20,7 @@ pipeline {
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shoptest'    
             }
             }
+        }
             agent { 
                 label 'ubuntu'
             }
