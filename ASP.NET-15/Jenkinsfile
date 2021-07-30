@@ -20,13 +20,13 @@ pipeline {
                 sh 'sudo docker run -d --restart=always -p 80:80 --name shoptest nazarserver/shoptest'    
             }
             }
-            steps{
+            step{
                 echo " ============== Selenium Test  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' echo Super-puper-test'    
             }
             }
-            steps{
+            step{
                 echo " ============== Clear after test  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker stop shoptest'
