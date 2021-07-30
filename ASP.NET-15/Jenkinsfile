@@ -21,6 +21,7 @@ pipeline {
             }
             }
         }
+        stage("integration") {    
             agent { 
                 label 'ubuntu'
             }
@@ -32,4 +33,5 @@ pipeline {
             }
         }  
     }
+  }
 }
