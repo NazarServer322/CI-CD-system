@@ -12,7 +12,7 @@ pipeline {
     }
     stages {
        
-        steps("create docker image for test") {
+        stage("create docker image for test") {
             steps {
                 echo " ============== start building image for deploy  =================="
                 dir ('ASP.NET-15/Shop-15') {
@@ -20,7 +20,7 @@ pipeline {
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shoptest'    
             }
             }
-        stage("create docker image")
+        stage ("create docker image")
             agent { 
                 label 'ubuntu'
             }
