@@ -2,7 +2,7 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-         label 'ubuntu'    
+         label 'test'    
          }
              
     triggers { pollSCM('* * * * *') }
@@ -16,8 +16,8 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('Shop-15') {
-                sh ' sudo docker build  -t nazarserver/shop .'
-                sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shop'
+                sh ' sudo docker build  -t nazarserver/shopTest .'
+                sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/Test'
                 }
             }
         }
