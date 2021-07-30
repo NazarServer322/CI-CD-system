@@ -1,0 +1,26 @@
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+         label 'ubuntu'    
+         }
+             
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+       
+        stage("create docker image") {
+            steps {
+                echo " ============== start building image =================="
+                dir ('Shop-15') {
+                sh ' sudo docker build  -t nazarserver/shop .'
+                sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shop'
+                }
+            }
+        }
+       
+    }
+}
