@@ -30,6 +30,6 @@ pipeline {
                 sh ' sudo docker build  -t nazarserver/shop .'
                 sh 'sudo docker run -d --restart=always -p 80:80  nazarserver/shop'
             }
-        }
-       
+        }  
     }
+}
