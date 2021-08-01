@@ -23,7 +23,7 @@ pipeline {
        stage("docker login") {
             steps {
                 echo " ============== docker login =================="
-                withCredentials([usernamePassword(credentialsId: 'nazar_server_docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'nazarserver', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh 'sudo docker login -u $USERNAME -p $PASSWORD'                                       
             }
             }
