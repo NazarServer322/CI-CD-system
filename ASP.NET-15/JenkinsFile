@@ -18,7 +18,7 @@ pipeline {
             }
             }
             }            
-       stage("integration") {    
+       stage("Deploy") {    
             steps {
                 echo "================ Start building images for deploy ========="
                 dir ('ASP.NET-15/Shop-15') {
