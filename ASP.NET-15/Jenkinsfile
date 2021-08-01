@@ -58,7 +58,7 @@ pipeline {
             steps {
                 echo "================ Start building images for integration========="
                 dir ('ASP.NET-15/Shop-15') {
-                sh 'sudo docker pull nazarserver/shoptest .'
+                sh 'sudo docker pull nazarserver/shoptest '
                 sh 'sudo docker run -d --restart=always -p 80:80 --name market nazarserver/shoptest'
              }
              }  
