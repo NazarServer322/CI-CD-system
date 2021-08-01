@@ -11,7 +11,7 @@ pipeline {
     stages {
        stage("delete old docker for new") {
             steps {
-                echo " ============== delete old version  =================="
+                echo " ============== Delete old version  =================="
                 dir ('ASP.NET-15/Shop-15') {
                 sh ' sudo docker stop shoptest'
                 sh 'sudo docker rm shoptest'    
@@ -20,7 +20,7 @@ pipeline {
             }            
        stage("integration") {    
             steps {
-                echo "================ Start building images for integration========="
+                echo "================ Start building images for deploy ========="
                 dir ('ASP.NET-15/Shop-15') {
                 sh 'sudo docker pull nazarserver/shoptest '
                 sh 'sudo docker run -d --restart=always -p 80:80 --name market nazarserver/shoptest'
