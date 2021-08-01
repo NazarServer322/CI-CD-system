@@ -31,7 +31,7 @@ pipeline {
        stage("docker push") {
            steps {
                echo " ============== pushing image =================="
-               sh ' sudo docker push nazarserver/shop:latest'                             
+               sh ' sudo docker push nazarserver/shoptest:latest'                             
           }
           }
         stage("test time"){
