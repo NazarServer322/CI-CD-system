@@ -20,6 +20,24 @@ pipeline {
             }
             }
             }
+       stage("docker login") {
+            steps {
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'nazarserver', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                sh '''
+                    docker login -u $USERNAME -p $PASSWORD
+                    '''
+            }
+            }
+            }
+       stage("docker push") {
+           steps {
+               echo " ============== pushing image =================="
+               sh '''
+               docker push nazarserver/shop:latest
+               '''
+          }
+          }
         stage("test time"){
             steps {
                 echo " ============== Selenium Test  =================="
