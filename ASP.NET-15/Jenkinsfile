@@ -24,18 +24,14 @@ pipeline {
             steps {
                 echo " ============== docker login =================="
                 withCredentials([usernamePassword(credentialsId: 'nazar_server_docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                sh '''
-                    docker login -u $USERNAME -p $PASSWORD
-                    '''
+                sh 'docker login -u $USERNAME -p $PASSWORD'                                       
             }
             }
             }
        stage("docker push") {
            steps {
                echo " ============== pushing image =================="
-               sh '''
-               docker push nazarserver/shop:latest
-               '''
+               sh 'docker push nazarserver/shop:latest'                             
           }
           }
         stage("test time"){
