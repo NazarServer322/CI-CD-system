@@ -13,8 +13,7 @@ pipeline {
             steps {
                 echo " ============== Delete old version  =================="
                 dir ('ASP.NET-15/Shop-15') {
-                sh ' sudo docker stop market'
-                sh 'sudo docker rm market'    
+                    
             }
             }
             }            
