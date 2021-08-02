@@ -38,8 +38,8 @@ pipeline {
             steps {
                 echo " ============== Selenium Test  =================="
                 dir ('ASP.NET-15/Seleniumtest') {
-                sh ' sudo docker build -t nazarserver/selenium .'
-                   ' sudo docker run -d --name seleniumtest nazarserver/selenium'
+                sh 'sudo docker build -t nazarserver/selenium .'
+                   'sudo docker run -d --name seleniumtest nazarserver/selenium'
             }
             }
             }
