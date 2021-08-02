@@ -39,7 +39,7 @@ pipeline {
                 echo " ============== Selenium Test  =================="
                 dir ('ASP.NET-15/Seleniumtest') {
                 sh 'sudo docker build -t nazarserver/selenium .'
-                   'sudo docker run -d --name seleniumtest nazarserver/selenium'
+                sh 'sudo docker run -d --name seleniumtest nazarserver/selenium'
             }
             }
             }
@@ -48,8 +48,8 @@ pipeline {
                 echo " ============== Selenium clear  =================="
                 dir ('ASP.NET-15/Seleniumtest') {
                 sh  'sudo docker stop seleniumtest'
-                    'sudo docker rm seleniumtest'
-                    'sudo docker rmi nazarserver/selenium'
+                sh   'sudo docker rm seleniumtest'
+                sh   'sudo docker rmi nazarserver/selenium'
             }
             }
             } 
