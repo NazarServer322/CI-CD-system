@@ -5,16 +5,16 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 # Updating apt to see and install Google Chrome
 RUN apt-get -y update
-# Magic happens
+# Install chrome
 RUN apt-get install  google-chrome-stable -y
 
 #Installing Unzip
 RUN apt-get install -yqq unzip
 # Download the Chrome Driver
 RUN wget -O /tmp/chromedriver_linux64.zip  https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip
-# Unzip the Chrome Driver into /usr/local/bin directory
+# Unzip the Chrome Driver into 
 RUN unzip /tmp/chromedriver_linux64.zip chromedriver -d /usr/local/bin/
-# Set display port as an environment variable
+
 ENV DISPLAY=:99
 
 WORKDIR /test-app
