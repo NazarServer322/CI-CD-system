@@ -43,7 +43,7 @@ pipeline {
             }
             }
             }
-        stage("test time"){
+        stage("Clear test time"){
             steps {
                 echo " ============== Selenium clear  =================="
                 dir ('ASP.NET-15/Seleniumtest') {
