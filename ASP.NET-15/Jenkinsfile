@@ -1,78 +1,17 @@
-properties([disableConcurrentBuilds()])
-
 pipeline {
-    agent {
-         label 'Test'    
-         }
-             
-   // triggers { pollSCM('* * * * *') }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-        timestamps()
-    }
+    agent any
+       parameters {
+  choice choices: ['DROID/MASTER/Equis_Android', 'DROID/MASTER/Equis_IOS', 'DROID/MASTER/Panther_Android', 'DROID/MASTER/Panther_IOS', 'DROID/MASTER/Panther.Enable.Android', 'DROID/MASTER/Panther.Enable.IOS', 'DROID/MASTER/PantherAwsServer_Android', 'DROID/MASTER/PantherAwsServer_iOS', 'DROID/MASTER/RadiantCreate_Android', 'DROID/MASTER/RadiantCreate_iOS', 'DROID/MASTER/RedPanda_Android', 'DROID/MASTER/RedPanda_IOS', 'DROID/MASTER/RedPanda_IOS_AdHoc', 'DROID/MASTER/VAT2Go_IOS', 'DROID/MASTER/VAT2Go_Android', 'DROID/MASTER/RadiantFind_iOS', 'DROID/MASTER/RadiantFind_Android'], name: 'Choice-Diawi'
+
+  
+
+}
     stages {
-       stage("create docker image for test") {
+        stage('Deploy on Diawi') {
             steps {
-                echo " ============== start building image for integration  =================="
-                dir ('ASP.NET-15/Shop-15') {
-                sh ' sudo docker build  -t nazarserver/shoptest .'
-                sh 'sudo docker run -d --restart=always -p 80:80 --name shoptest nazarserver/shoptest'    
+             bat 'chdir/d C:\\Services\\rfid-DiaWi\\DiaWi_Latest && python Nest.py %Choice-Diawi% '
             }
-            }
-            }
-       stage("docker login") {
-            steps {
-                echo " ============== docker login =================="
-                withCredentials([usernamePassword(credentialsId: 'nazarserver', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                sh 'sudo docker login -u $USERNAME -p $PASSWORD'                                       
-            }
-            }
-            }
-       stage("docker push") {
-           steps {
-               echo " ============== pushing image =================="
-               sh ' sudo docker push nazarserver/shoptest:latest'                             
-          }
-          }
-        stage("test time"){
-            steps {
-                echo " ============== Selenium Test  =================="
-                dir ('ASP.NET-15/Seleniumtest') {
-                sh 'sudo docker build -t nazarserver/selenium .'
-                sh 'sudo docker run -d --name seleniumtest nazarserver/selenium'
-            }
-            }
-            }
-        stage("Clear test time"){
-            steps {
-                echo " ============== Selenium clear  =================="
-                dir ('ASP.NET-15/Seleniumtest') {
-                sh  'sudo docker stop seleniumtest'
-                sh   'sudo docker rm seleniumtest'
-                sh   'sudo docker rmi nazarserver/selenium'
-            }
-            }
-            } 
-        stage("clen docker for future  test"){
-             steps {   
-                echo " ============== Clear after test  =================="
-                dir ('ASP.NET-15/Shop-15') {
-                sh ' sudo docker stop shoptest'
-                sh 'sudo docker rm shoptest'    
-            }
-            }           
-            }
-        stage("Deploy") {    
-            agent { 
-                label 'ubuntu'
-            }
-            steps {
-                echo "================ Start building images for Deploy ========="
-                dir ('ASP.NET-15/Shop-15') {
-                sh 'sudo docker pull nazarserver/shoptest '
-                sh 'sudo docker run -d --restart=always -p 80:80 --name market nazarserver/shoptest'
-             }
-             }  
-             }
+        }
     }
-  }
+
+}
