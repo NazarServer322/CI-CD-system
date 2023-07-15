@@ -1,17 +1,18 @@
 pipeline {
-    agent any
+	agent any
+	environment {
+      workspace         = "home/ubuntu/ansible"   
+	}
        parameters {
-  choice choices: ['DROID/MASTER/Equis_Android', 'DROID/MASTER/Equis_IOS', 'DROID/MASTER/Panther_Android', 'DROID/MASTER/Panther_IOS', 'DROID/MASTER/Panther.Enable.Android', 'DROID/MASTER/Panther.Enable.IOS', 'DROID/MASTER/PantherAwsServer_Android', 'DROID/MASTER/PantherAwsServer_iOS', 'DROID/MASTER/RadiantCreate_Android', 'DROID/MASTER/RadiantCreate_iOS', 'DROID/MASTER/RedPanda_Android', 'DROID/MASTER/RedPanda_IOS', 'DROID/MASTER/RedPanda_IOS_AdHoc', 'DROID/MASTER/VAT2Go_IOS', 'DROID/MASTER/VAT2Go_Android', 'DROID/MASTER/RadiantFind_iOS', 'DROID/MASTER/RadiantFind_Android'], name: 'Choice-Diawi'
-
-  
+  choice choices: ['a1', 'a2'], name: 'Choice-Diawi'
 
 }
     stages {
-        stage('Deploy on Diawi') {
-            steps {
-             bat 'chdir/d C:\\Services\\rfid-DiaWi\\DiaWi_Latest && python Nest.py %Choice-Diawi% '
-            }
-        }
+     	stage("Build"){
+			steps{
+				dir("${workspace}"){
+					sh 'ansible-playbook -i  $Choice-Diawi  play1.yml'
+				}
+			}
+		}
     }
-
-}
